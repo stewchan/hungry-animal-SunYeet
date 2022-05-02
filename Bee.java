@@ -14,7 +14,37 @@ public class Bee extends Actor
      */
     public void act()
     {
-        move(10);
+        fly();
+    }
+    
+    public void fly()
+    {
+        int x = getX();
+        int y = getY();
+        
+        if(Greenfoot.isKeyDown("W")) 
+        {
+            setRotation(270);
+            y -= 5;
+        }
+        if(Greenfoot.isKeyDown("S")) 
+        {
+            setRotation(270);
+            y += 5;
+        }
+        if(Greenfoot.isKeyDown("A")) 
+        {
+            setRotation(180);
+            x -= 5;
+        }
+
+        if(Greenfoot.isKeyDown("D")) 
+        {
+            setRotation(0);
+            x += 5;
+        }
+        
+        setLocation (x, y);
     }
     
     private static int numBees;
@@ -28,8 +58,9 @@ public class Bee extends Actor
         numBees += 1;
     }
     
-    public void fly()
+    public int getSpeed()
     {
-        move(this.speed);
+        return speed;
     }
+    
 }
