@@ -14,7 +14,11 @@ public class Wasp extends Actor
      */
     public void act()
     {
-        // Addur action code here.
+        if(MyWorld.worldPause == false)
+        {
+            move(1);
+            turn(2);
+        }
     }
     private int size;
     private int speed;
