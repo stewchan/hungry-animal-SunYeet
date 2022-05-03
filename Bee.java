@@ -63,4 +63,6 @@ public class Bee extends Actor
         return speed;
     }
     
+    //public double get
+    
 }
