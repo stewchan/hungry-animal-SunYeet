@@ -12,16 +12,34 @@ public class Bee extends Actor
      * Act - do whatever the deadleebee wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    private boolean gameOver = false;
     public void act()
     {
-        fly();
+        
+        
+        if(gameOver == false)
+        {
+            fly();
+        }
+        
+        if(isTouching(Wasp.class))
+        {
+            gameOver = true;
+            //Greenfoot.setWorld(new GameOver());
+            
+        }
+        
     }
-    
+    public boolean getGameOver()
+    {
+        return gameOver;
+    }
     public void fly()
     {
         int x = getX();
         int y = getY();
         
+  
         if(Greenfoot.isKeyDown("W")) 
         {
             setRotation(270);
@@ -45,6 +63,13 @@ public class Bee extends Actor
         }
         
         setLocation (x, y);
+        
+ 
+    }
+    
+    public void gameOver()
+    {
+        
     }
     
     private static int numBees;
