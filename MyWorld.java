@@ -28,7 +28,7 @@ public class MyWorld extends World
         //int waspX = 400;
         //int waspY = 100;
         
-        
+        worldPause = false;
     }
     public void act()
     {
