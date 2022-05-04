@@ -13,9 +13,10 @@ public class Bee extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private boolean gameOver = false;
+    private boolean touchingFlower = false;
     public void act()
     {
-        
+        touchingFlower = false;
         
         if(gameOver == false)
         {
@@ -29,10 +30,18 @@ public class Bee extends Actor
             
         }
         
+        if(isTouching(Flower.class))
+        {
+            touchingFlower = true;
+        }
     }
     public boolean getGameOver()
     {
         return gameOver;
+    }
+    public boolean getTouchingFlower()
+    {
+        return touchingFlower;
     }
     public void fly()
     {

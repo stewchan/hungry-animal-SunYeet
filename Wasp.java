@@ -16,8 +16,8 @@ public class Wasp extends Actor
     {
         if(MyWorld.worldPause == false)
         {
-            move(1);
-            turn(2);
+            move(2);
+            turn(1);
         }
     }
     private int size;
