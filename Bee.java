@@ -6,6 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
+static public int flowersTouched = 0;
 public class Bee extends Actor
 {
     /**
@@ -33,6 +34,7 @@ public class Bee extends Actor
         if(isTouching(Flower.class))
         {
             touchingFlower = true;
+            flowersTouched += 1;
         }
     }
     public boolean getGameOver()
