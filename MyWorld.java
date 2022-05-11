@@ -13,7 +13,8 @@ public class MyWorld extends World
      * Constructor for objects of class MyWorld.
      * 
      */
-    public int level = 1;
+    public int score = 0;
+    public Label scoreLabel = new Label(0, 50);
     Bee deadleebee = new Bee(10);
     Flower flower = new Flower();
     public static boolean worldPause = false;
@@ -24,6 +25,7 @@ public class MyWorld extends World
         
         Wasp en1 = new Wasp(1);
         Wasp en2 = new Wasp(2);
+        addObject(scoreLabel, 50, 50);
         addObject(deadleebee, 300, 200);
         addObject(en1, Greenfoot.getRandomNumber(250), Greenfoot.getRandomNumber(400));
         addObject(en2, Greenfoot.getRandomNumber(600), Greenfoot.getRandomNumber(150));
@@ -46,17 +48,24 @@ public class MyWorld extends World
             Greenfoot.setWorld(new GameOver());
             */
             worldPause = true;
+            Label gameOver = new Label("Game Over!", 100);
+            addObject(gameOver, 300, 200);
         }
         if(deadleebee.getTouchingFlower() == true)
         {
             removeObject(flower);
             spawnFlower();
+            increaseScore();
+            
         }
     }
     public void spawnFlower()
     {
         addObject(flower, Greenfoot.getRandomNumber(600), Greenfoot.getRandomNumber(400));
     }
-    
-    
+    public void increaseScore()
+    {
+        score++;
+        scoreLabel.setValue(score);
+    }
 }

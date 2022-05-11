@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-static public int flowersTouched = 0;
+
 public class Bee extends Actor
 {
     /**
@@ -15,6 +15,7 @@ public class Bee extends Actor
      */
     private boolean gameOver = false;
     private boolean touchingFlower = false;
+    static public int flowersTouched = 0;
     public void act()
     {
         touchingFlower = false;
