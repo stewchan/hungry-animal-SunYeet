@@ -14,11 +14,15 @@ public class Flower extends Actor
      */
     public void act() 
     {
-        // Add your action code here.
+        fall();// Add your action code here.
     }    
     
     public Flower()
     {
         
+    }
+    public void fall()
+    {
+        setLocation(getX(), getY() + 2);
     }
 }
