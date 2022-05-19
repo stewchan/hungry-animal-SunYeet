@@ -27,7 +27,7 @@ public class MyWorld extends World
         
         addObject(scoreLabel, 50, 50);
         addObject(levelLabel, 550, 50);
-        addObject(deadleebee, 300, 200);
+        addObject(deadleebee, 300, 350);
         spawnFlower();
         
         level = 1;
