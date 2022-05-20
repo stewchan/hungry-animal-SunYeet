@@ -15,7 +15,7 @@ public class Flower extends Actor
     public void act() 
     {
         MyWorld world = new MyWorld();
-        fall(world.getLevel()  * 2);// Add your action code here.
+        //fall(world.getLevel()  * 2);// Add your action code here.
     }    
     
     public Flower()

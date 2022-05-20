@@ -15,22 +15,33 @@ public class MyWorld extends World
      */
     public int score = 0;
     public Label scoreLabel = new Label(0, 50);
-    public Label levelLabel = new Label(0, 50);
     Bee deadleebee = new Bee();
     Flower flower = new Flower();
     public static boolean worldPause = false;
-    public static int level = 1;
+    private GreenfootImage[] skyField;
+    private SimpleTimer animTimer;
     public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+        super(600, 400, 1, false); 
         
+        Wasp en1 = new Wasp(1);
+        Wasp en2 = new Wasp(2);
         addObject(scoreLabel, 50, 50);
-        addObject(levelLabel, 550, 50);
-        addObject(deadleebee, 300, 350);
+        addObject(deadleebee, 300, 200);
+        //addObject(en1, Greenfoot.getRandomNumber(250), Greenfoot.getRandomNumber(400));
+        //addObject(en2, Greenfoot.getRandomNumber(600), Greenfoot.getRandomNumber(150));
         spawnFlower();
-        
-        level = 1;
+        skyField = new GreenfootImage[21];
+        for(int i = 0; i < skyField.length; i++)
+        {
+            skyField[i] = new GreenfootImage("images/sky-and-field-background/sky-and-field-background-" + i + ".png");
+            skyField[i].scale(skyField[i].getWidth() - 100, skyField[i].getHeight() - 100);
+            
+        }
+        setBackground(skyField[3]);
+        animTimer = new SimpleTimer();
+        animTimer.mark();
 
         //int waspX = 400;
         //int waspY = 100;
@@ -40,54 +51,46 @@ public class MyWorld extends World
     public void act()
     {
         
-        GreenfootImage myImage = new GreenfootImage("bathroom-tile.jpg");
-        int scoreToLevelUp = 0;
         
+        //GreenfootImage myImage = new GreenfootImage("bathroom-tile.jpg");
+        /*
         if(deadleebee.getGameOver() == true)
         {
             setBackground(myImage);
             /*
             Greenfoot.setWorld(new GameOver());
             */
-            worldPause = true;
-            Label gameOver = new Label("Game Over!", 100);
-            addObject(gameOver, 300, 200);
-        }
-
+            //worldPause = true;
+            //Label gameOver = new Label("Game Over!", 100);
+          //  addObject(gameOver, 300, 200);
+        //}
         if(deadleebee.getTouchingFlower() == true)
         {
             removeObject(flower);
             spawnFlower();
             increaseScore();
-            scoreToLevelUp ++;
+            
         }
-        
-        if(scoreToLevelUp == 2)
+        animate();
+    }
+    int curIndex = 0;
+    public void animate()
+    {
+        if(animTimer.millisElapsed() > 100)
         {
-            levelUp();
-            scoreToLevelUp = 0;
+            setBackground(skyField[curIndex]);
+            curIndex++;
+            curIndex %= 21;
+            animTimer.mark();
         }
-        
-        
-        
     }
     public void spawnFlower()
     {
-        addObject(flower, Greenfoot.getRandomNumber(600), 0);
+        addObject(flower, Greenfoot.getRandomNumber(600), Greenfoot.getRandomNumber(400));
     }
     public void increaseScore()
     {
         score++;
         scoreLabel.setValue(score);
-    }
-    public void levelUp()
-    {
-            
-            level ++;
-            levelLabel.setValue(level);
-    }
-    public int getLevel()
-    {
-        return level;
     }
 }

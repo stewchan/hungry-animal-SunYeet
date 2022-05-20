@@ -16,6 +16,26 @@ public class Bee extends Actor
     private boolean gameOver = false;
     private boolean touchingFlower = false;
     static public int flowersTouched = 0;
+    private GreenfootImage[] rightBee;
+    private GreenfootImage[] leftBee;
+    private SimpleTimer animTimer;
+    private boolean isFacingRight;
+    public Bee()
+    {
+        rightBee = new GreenfootImage[15];
+        leftBee = new GreenfootImage[15];
+        for(int i = 0; i < rightBee.length; i++)
+        {
+            rightBee[i] = new GreenfootImage("images/bee/bee-" + i + ".png");
+            rightBee[i].scale(rightBee[i].getWidth()/5, rightBee[i].getHeight()/5);
+            leftBee[i] = new GreenfootImage("images/bee/bee-" + i + ".png");
+            leftBee[i].mirrorHorizontally();
+            leftBee[i].scale(leftBee[i].getWidth()/5, leftBee[i].getHeight()/5);
+        }
+        setImage(rightBee[3]);
+        animTimer = new SimpleTimer();
+        animTimer.mark();
+    }
     public void act()
     {
         touchingFlower = false;
@@ -23,6 +43,7 @@ public class Bee extends Actor
         if(gameOver == false)
         {
             fly();
+            animate();
         }
         
         if(isTouching(Wasp.class))
@@ -36,6 +57,24 @@ public class Bee extends Actor
         {
             touchingFlower = true;
             flowersTouched += 1;
+        }
+        
+    }
+    int curIndex = 0;
+    public void animate()
+    {
+        if(animTimer.millisElapsed() > 100)
+        {
+            if(isFacingRight)
+            {
+                setImage(rightBee[curIndex]);
+            } 
+            else
+            {
+                setImage(leftBee[curIndex]);
+            }
+            curIndex++;
+            curIndex %= 15;
         }
     }
     public boolean getGameOver()
@@ -52,13 +91,13 @@ public class Bee extends Actor
 
         if(Greenfoot.isKeyDown("A")) 
         {
-            setRotation(180);
+            isFacingRight = false;
             x -= 5;
         }
 
         if(Greenfoot.isKeyDown("D")) 
         {
-            setRotation(0);
+            isFacingRight = true;
             x += 5;
         }
         
