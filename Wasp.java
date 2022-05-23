@@ -19,6 +19,7 @@ public class Wasp extends Actor
             move(2);
             turn(1);
         }
+        setLocation(getX(), getY() + 3);
     }
     private int size;
     private int speed;

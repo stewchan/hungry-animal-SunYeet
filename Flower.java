@@ -15,15 +15,21 @@ public class Flower extends Actor
     public void act() 
     {
         MyWorld world = new MyWorld();
-        //fall(world.getLevel()  * 2);// Add your action code here.
+        fall();// Add your action code here.
+        if(getY() >= 399)
+        {
+            world.gameOver();
+        }
     }    
     
     public Flower()
     {
-        
+        GreenfootImage flower = new GreenfootImage("images/flower.png");
+        flower.scale(flower.getWidth() - 150, flower.getWidth() - 150);
+        setImage(flower);
     }
-    public void fall(int speed)
+    public void fall()
     {
-        setLocation(getX(), getY() + speed);
+        setLocation(getX(), getY() + 5);
     }
 }

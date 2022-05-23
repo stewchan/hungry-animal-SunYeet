@@ -13,7 +13,7 @@ public class Bee extends Actor
      * Act - do whatever the deadleebee wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private boolean gameOver = false;
+    private static boolean gameOver = false;
     private boolean touchingFlower = false;
     static public int flowersTouched = 0;
     private GreenfootImage[] rightBee;
@@ -27,10 +27,10 @@ public class Bee extends Actor
         for(int i = 0; i < rightBee.length; i++)
         {
             rightBee[i] = new GreenfootImage("images/bee/bee-" + i + ".png");
-            rightBee[i].scale(rightBee[i].getWidth()/5, rightBee[i].getHeight()/5);
+            rightBee[i].scale(rightBee[i].getWidth() - 300, rightBee[i].getHeight() - 300);
             leftBee[i] = new GreenfootImage("images/bee/bee-" + i + ".png");
             leftBee[i].mirrorHorizontally();
-            leftBee[i].scale(leftBee[i].getWidth()/5, leftBee[i].getHeight()/5);
+            leftBee[i].scale(leftBee[i].getWidth() - 300, leftBee[i].getHeight() - 300);
         }
         setImage(rightBee[3]);
         animTimer = new SimpleTimer();
@@ -48,8 +48,8 @@ public class Bee extends Actor
         
         if(isTouching(Wasp.class))
         {
-            gameOver = true;
-            //Greenfoot.setWorld(new GameOver());
+            //gameOver = true;
+            Greenfoot.setWorld(new GameOver());
             
         }
         
@@ -92,13 +92,13 @@ public class Bee extends Actor
         if(Greenfoot.isKeyDown("A")) 
         {
             isFacingRight = false;
-            x -= 5;
+            x -= 10;
         }
 
         if(Greenfoot.isKeyDown("D")) 
         {
             isFacingRight = true;
-            x += 5;
+            x += 10;
         }
         
         setLocation (x, getY());
@@ -106,10 +106,7 @@ public class Bee extends Actor
  
     }
     
-    public void gameOver()
-    {
-        
-    }
+
  
     
     //public double get

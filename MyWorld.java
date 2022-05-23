@@ -15,8 +15,10 @@ public class MyWorld extends World
      */
     public int score = 0;
     public Label scoreLabel = new Label(0, 50);
+    public Label gameOverLabel = new Label("Game Over!", 100);
     Bee deadleebee = new Bee();
     Flower flower = new Flower();
+    Wasp ant = new Wasp(3);
     public static boolean worldPause = false;
     private GreenfootImage[] skyField;
     private SimpleTimer animTimer;
@@ -25,13 +27,13 @@ public class MyWorld extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1, false); 
         
-        Wasp en1 = new Wasp(1);
-        Wasp en2 = new Wasp(2);
+
         addObject(scoreLabel, 50, 50);
-        addObject(deadleebee, 300, 200);
-        //addObject(en1, Greenfoot.getRandomNumber(250), Greenfoot.getRandomNumber(400));
-        //addObject(en2, Greenfoot.getRandomNumber(600), Greenfoot.getRandomNumber(150));
+        addObject(deadleebee, 300, 300);
+
         spawnFlower();
+        spawnWasp();
+        
         skyField = new GreenfootImage[21];
         for(int i = 0; i < skyField.length; i++)
         {
@@ -42,28 +44,12 @@ public class MyWorld extends World
         setBackground(skyField[3]);
         animTimer = new SimpleTimer();
         animTimer.mark();
-
-        //int waspX = 400;
-        //int waspY = 100;
-        
         worldPause = false;
     }
     public void act()
     {
         
-        
-        //GreenfootImage myImage = new GreenfootImage("bathroom-tile.jpg");
-        /*
-        if(deadleebee.getGameOver() == true)
-        {
-            setBackground(myImage);
-            /*
-            Greenfoot.setWorld(new GameOver());
-            */
-            //worldPause = true;
-            //Label gameOver = new Label("Game Over!", 100);
-          //  addObject(gameOver, 300, 200);
-        //}
+
         if(deadleebee.getTouchingFlower() == true)
         {
             removeObject(flower);
@@ -71,6 +57,7 @@ public class MyWorld extends World
             increaseScore();
             
         }
+        
         animate();
     }
     int curIndex = 0;
@@ -86,11 +73,26 @@ public class MyWorld extends World
     }
     public void spawnFlower()
     {
-        addObject(flower, Greenfoot.getRandomNumber(600), Greenfoot.getRandomNumber(400));
+        addObject(flower, Greenfoot.getRandomNumber(600), 0);
+    }
+    public void spawnWasp()
+    {
+        addObject(ant, Greenfoot.getRandomNumber(600), 0);
     }
     public void increaseScore()
     {
         score++;
         scoreLabel.setValue(score);
     }
+    
+    public void gameOver()
+    {
+        GameOver world = new GameOver();
+        Greenfoot.setWorld(world);
+        //worldPause = true;
+       
+        //addObject(gameOverLabel, 300, 200);
+        
+    }
+    
 }
