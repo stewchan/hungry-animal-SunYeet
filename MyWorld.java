@@ -27,7 +27,8 @@ public class MyWorld extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1, false); 
         
-
+        addObject(new Dolphin(), 300, 200);
+        
         addObject(scoreLabel, 50, 50);
         addObject(deadleebee, 300, 300);
 
